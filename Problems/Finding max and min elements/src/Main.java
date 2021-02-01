@@ -9,8 +9,11 @@ class MinMax {
             Stream<? extends T> stream,
             Comparator<? super T> order,
             BiConsumer<? super T, ? super T> minMaxConsumer) {
+            List<? extends T> terds = stream.collect(Collectors.toList());
 
-        Stream<? extends T> sre = stream.sorted(order);
-        minMaxConsumer.accept(sre.min().orElse(null), sre.max().orElse(null));
+            Stream<? extends T> sre = terds.stream();
+        Stream<? extends T> srd = terds.stream();
+
+        minMaxConsumer.accept(sre.min(order).orElse(null), srd.max(order).orElse(null));
     }
 }
